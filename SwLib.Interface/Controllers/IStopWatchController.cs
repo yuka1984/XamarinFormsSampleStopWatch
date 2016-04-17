@@ -50,7 +50,7 @@ namespace SwLib.Pcl.Controllers
         OK,
         /// <summary>名前重複</summary>
         NameRepeat,
-        /// <summary>スタートしていません</summary>
-        NotStarted,
+        /// <summary>タイマーが動いています。</summary>
+        Started,
     }
 }

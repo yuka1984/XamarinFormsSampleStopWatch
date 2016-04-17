@@ -1,23 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StopWatch.StopwatchPage">
-  <StackLayout VerticalOptions="FillAndExpand">
-    <ListView ItemsSource="{Binding Laps}" HeightRequest="100" VerticalOptions="Start">
+             x:Class="StopWatch.StopwatchPage"
+             Title="StopWatch"
+             >
+  <StackLayout VerticalOptions="FillAndExpand">    
+    <ListView ItemsSource="{Binding Laps}" HeightRequest="100" HasUnevenRows="True" VerticalOptions="Start">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <Label Text="{Binding}"></Label>
+            <Label Text="{Binding}" XAlign="Center"></Label>
           </ViewCell>          
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
+    <Button Command="{Binding LapCommand}" Text="Lap"/>
     <Label Text="{Binding Time.Value}" VerticalOptions="CenterAndExpand" XAlign="Center" Rotation="{Binding Rotation.Value}" />
     <StackLayout Orientation="Horizontal" VerticalOptions="End">
       <Button Command="{Binding StartCommand}" Text="{Binding StartCommandTitle.Value}" />
       <Button Command="{Binding StopCommand}" Text="Stop" />
       <Button Command="{Binding ClearCommand}" Text="Clear" />
-      <Button Command="{Binding LapCommand}" Text="Lap" HorizontalOptions="End" />
+      <Button Command="{Binding ToSaveCommand}" Text="Save" />      
     </StackLayout>
   </StackLayout>  
 </ContentPage>

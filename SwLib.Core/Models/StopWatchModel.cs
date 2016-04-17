@@ -13,14 +13,23 @@ namespace SwLib.Core.Models
 
         public ObservableCollection<long> laps { get; }
 
-        public long ElapsedTime { get; private set; }
+        private long _elapsedTime;
+
+        public long ElapsedTime
+        {
+            get
+            {
+                return _elapsedTime;
+            }
+            set
+            {
+                if (SetProperty(ref _elapsedTime, value))
+                {
+                    
+                }
+            }
+        }
 
         public ReadOnlyObservableCollection<long> Laps { get; }
-
-        public void SetElapsedTime(long elapsedTime)
-        {
-            ElapsedTime = elapsedTime;
-            OnPropertyChanged(nameof(ElapsedTime));
-        }
     }
 }

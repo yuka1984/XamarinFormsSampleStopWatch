@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StopWatch.SaveListPage" Title="ResultList">
+  <StackLayout Orientation="Vertical">
+    <ListView ItemsSource="{Binding SaveItemKeys}" HasUnevenRows="True" SelectedItem="{Binding SelectedSaveItemKey.Value}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Label Text="{Binding}" XAlign="Center"></Label>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Label Text="TotalTime" FontSize="Small" />
+    <Label Text="{Binding SelectedSaveItemTime.Value}" FontSize="Large" XAlign="Center" />
+    <Label Text="LapTimes" FontSize="Small" />
+    <ListView ItemsSource="{Binding SelectedSaveItemLaps.Value}" HasUnevenRows="True">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Label Text="{Binding}" XAlign="Center"></Label>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>

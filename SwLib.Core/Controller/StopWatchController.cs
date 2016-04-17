@@ -86,7 +86,7 @@ namespace SwLib.Core.Controller
             _stopwatch.Stop();
             _updatetimer.Dispose();
             _updatetimer = null;
-            _stopWatchModel.SetElapsedTime(_stopwatch.ElapsedMilliseconds);
+            _stopWatchModel.ElapsedTime = _stopwatch.ElapsedMilliseconds;
         }
 
         /// <summary>ストップウォッチをクリアします</summary>
@@ -103,8 +103,8 @@ namespace SwLib.Core.Controller
         /// <returns></returns>
         public SaveResultStatus Save(string name)
         {
-            if (!IsStart)
-                return SaveResultStatus.NotStarted;
+            if (IsStart)
+                return SaveResultStatus.Started;
 
             var models = SaveModels;
             if (models.Any(x => x.Item1.Equals(name)))
@@ -113,7 +113,8 @@ namespace SwLib.Core.Controller
             var savemodel = Tuple.Create(name, _stopWatchModel);
             models.Add(savemodel);
             _keyValueStore.Create(SaveKey, models);
-            _saveStopWatchModels.Add(Tuple.Create(savemodel.Item1, (IStopWatchModel) savemodel.Item2));
+            var savedmodel = SaveModels.Last();
+            _saveStopWatchModels.Add(Tuple.Create(savedmodel.Item1, (IStopWatchModel)savedmodel.Item2));
 
             return SaveResultStatus.OK;
         }
@@ -127,6 +128,6 @@ namespace SwLib.Core.Controller
             _saveStopWatchModels.Clear();
         }
 
-        private void TimeUpdate() => _stopWatchModel.SetElapsedTime(_stopwatch.ElapsedMilliseconds);
+        private void TimeUpdate() => _stopWatchModel.ElapsedTime = _stopwatch.ElapsedMilliseconds;
     }
 }
